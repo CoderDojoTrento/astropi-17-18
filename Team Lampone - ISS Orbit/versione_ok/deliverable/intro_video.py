@@ -1,19 +1,20 @@
-####################################################################
-# animazioni introduttiva con conto alla rovescia e partenza razzo #
-####################################################################
+########################################################################
+# IT: animazioni introduttiva con conto alla rovescia e partenza razzo #
+# EN: opening animation with countdown and rocket take-off             #
+########################################################################
 
 from sense_hat import SenseHat
 from time import sleep
 def intro_video():
     s=SenseHat()
     s.low_light = True
-    w=(255, 255, 255)  # bianco
-    n=(  0,   0,   0)  # nero
-    r=(255,   0,   0)  # rosso
-    b=(  0,   0, 255)  # blu
-    v=(  0, 153,   0)  # verde
+    w=(255, 255, 255)  # bianco / white
+    n=(  0,   0,   0)  # nero   / black
+    r=(255,   0,   0)  # rosso  / red
+    b=(  0,   0, 255)  # blu    / blue
+    v=(  0, 153,   0)  # verde  / green
 
-    # countdown + immagine razzo
+    # countdown + immagine razzo / countdown + rocket image 
     p=[
     r,r,r,n,n,b,n,n,
     n,n,r,n,n,w,n,n,
@@ -35,7 +36,7 @@ def intro_video():
             s.set_pixel(2,y,n)
     sleep(1)
 
-    # immagine razzo
+    # immagine razzo / rocket image 
     p=[
     n,n,n,n,n,w,n,n,
     n,n,n,n,w,b,w,n,
@@ -48,7 +49,8 @@ def intro_video():
     ]
     s.set_pixels(p)
 
-    # animazione razzo: sposta una riga in alto e aggiunge riga nera in fondo
+    # IT: animazione razzo: sposta una riga in alto e aggiunge riga nera in fondo
+    # EN: rocket animation: move one row to the top and add a blank line at the bottom
     for u in range(0,7):
       sleep(0.2)
       p2=p
@@ -58,7 +60,7 @@ def intro_video():
         p2[q+56]=n
       s.set_pixels(p2)
 
-    # bandiera ITA
+    # bandiera ITA / ITA flag
     sleep(0.2)
     p = [
     v,v,v,w,w,r,r,r,
@@ -72,6 +74,6 @@ def intro_video():
     ]
     s.set_pixels(p)
 
-    #Messaggio
+    # messaggio di presentazione / presentation message
     sleep(1)
     s.show_message("Lamponi Team (ITALIA)", scroll_speed=0.04)
