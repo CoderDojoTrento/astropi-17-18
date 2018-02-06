@@ -19,7 +19,7 @@ def preparazione_file(nome_file):
     intestazione.append("ora")
     intestazione.append("temperatura_CPU")
     intestazione.append("temperatura")
-    intestazione.append("umidità")
+    intestazione.append("umidita'")
     intestazione.append("pressione")
     intestazione.extend(["beccheggio", "rollio", "imbardata"])
     intestazione.extend(["mag_x", "mag_y", "mag_z"])

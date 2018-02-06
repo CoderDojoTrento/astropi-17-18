@@ -2,7 +2,7 @@
 #   ASTROPI 2018 - MISSION "SPACE LAB" (Life on Earth): GRUPPO LAMPONI (Italy)   #
 ##################################################################################
 # Abstract IT: Legge i dati dai sensori della Sense Hat e scatta fotografie per
-#              poter determinare la velocità a cui si muove la ISS
+#              poter determinare la velocita' a cui si muove la ISS
 # Abstract EN: Sense HAT sensor data are read and picture are taken with the camera
 #              in order to evaluate the ISS speed 
 #
@@ -17,8 +17,8 @@
 # FREQ_LETTURA_DATI     #frequenza raccolta dati (in sec)
 # FREQ_SCRITTURA_DATI   #frequenza scrittura su file (in numero di righe)
 # FREQ_FOTO             #frequenza foto in secondi
-# DURATA_WARMUP_CAMERA  #durata della preview (per mettere a fuoco la camera e bilanciare la luminosità)
-# camera.resolution     #risoluzione foto (v1 max 2592 × 1944) (v2 max 3280 × 2464)
+# DURATA_WARMUP_CAMERA  #durata della preview (per mettere a fuoco la camera e bilanciare la luminosita')
+# camera.resolution     #risoluzione foto (v1 max 2592 x 1944) (v2 max 3280 x 2464)
 #
 # EN: Config parameters used in the code:
 # NOME_FILE             #CSV file name prefix
@@ -26,10 +26,10 @@
 # FREQ_SCRITTURA_DATI   #writing to file frequency (in number of lines)
 # FREQ_FOTO             #picture take frequency (in sec)
 # DURATA_WARMUP_CAMERA  #camera preview span (in order to per focus the image and balance the brightness)
-# camera.resolution     #picture resolution (v1 max 2592 × 1944) (v2 max 3280 × 2464)
+# camera.resolution     #picture resolution (v1 max 2592 x 1944) (v2 max 3280 x 2464)
 #
-# N.B. IT: Non è necessario trascrivere nel codice le righe TLE della ISS: tutto il processamento è
-# fatto dopo il volo; tutto quello di cui ha bisogno il programma è sufficiente spazio disco per salvare
+# N.B. IT: Non e' necessario trascrivere nel codice le righe TLE della ISS: tutto il processamento e' 
+# fatto dopo il volo; tutto quello di cui ha bisogno il programma e' sufficiente spazio disco per salvare
 # i dati (meno di 3 GigaBytes stimati per un run di 3 ore) ed un ora di sistema ben regolata (per ricostruire
 # posizione ed altezza della ISS a partire dal timestamp delle fotografie).
 
@@ -61,7 +61,7 @@ NOME_FILE = "LamponeSenseLog"   # prefisso nome file CSV / CSV file name prefix
 FREQ_LETTURA_DATI= 1            # frequenza raccolta dati / data collection frequency (in sec)
 FREQ_SCRITTURA_DATI = 20        # frequenza scrittura su file (in numero di righe) / writing to file frequency (in number of lines)
 FREQ_FOTO = 12                  # frequenza foto in secondi (deve essere maggiore di DURATA_WARMUP_CAMERA) / picture take frequency (has to be greater of DURATA_WARMUP_CAMERA)
-DURATA_WARMUP_CAMERA = 4        # durata della preview (per mettere a fuoco la camera e bilanciare la luminosità) / camera preview span (in order to per focus the image and balance the brightness)
+DURATA_WARMUP_CAMERA = 4        # durata della preview (per mettere a fuoco la camera e bilanciare la luminosita') / camera preview span (in order to per focus the image and balance the brightness)
 
 # costanti per i colori / constants used for colors
 w=( 255, 255, 255) # bianco / white
@@ -108,7 +108,7 @@ def preparazione_file(nome_file):
     intestazione.append("ora")
     intestazione.append("temperatura_u")
     intestazione.append("temperatura_p")
-    intestazione.append("umidità")
+    intestazione.append("umidita'")
     intestazione.append("pressione")
     intestazione.extend(["beccheggio","rollio","imbardata"])
     intestazione.extend(["mag_x","mag_y","mag_z"])
@@ -126,7 +126,7 @@ def leggi_dati_sensore():
     # definisce una lista vuota dove mettere i dati / define an empty list to store data
     riga_di_dati=[]
     
-    # il primo elemento è l'ora attuale / first element is the timestamp
+    # il primo elemento e' l'ora attuale / first element is the timestamp
     riga_di_dati.append(datetime.now())
     
     # aggiunge alla lista i dati letti dai sensori / append read sensor data to the list
@@ -263,7 +263,7 @@ class polling_orientation:
 ##### Programma principale / Main program #####        
 
 camera = PiCamera()
-camera.resolution = (2592,1944) # risoluzione foto / picture resolution (v1 max 2592×1944) (v2 max 3280×2464)
+camera.resolution = (2592,1944) # risoluzione foto / picture resolution (v1 max 2592x1944) (v2 max 3280x2464)
 
 sense = SenseHat()
         
