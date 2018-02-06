@@ -43,10 +43,10 @@ import sys
 
 ##### Parametri di configurazione #####
 NOME_FILE = "LamponeSenseLog"   # prefisso nome file CSV
-FREQ_LETTURA_DATI= 2            # frequenza raccolta dati
+FREQ_LETTURA_DATI= 1            # frequenza raccolta dati
 FREQ_SCRITTURA_DATI = 20        # frequenza scrittura su file (in numero di righe)
-FREQ_FOTO = 15                  # frequenza foto in secondi (deve essere maggiore di DURATA_WARMUP_CAMERA)
-DURATA_WARMUP_CAMERA = 2        # durata della preview per mettere a fuoco la camera)
+FREQ_FOTO = 12                  # frequenza foto in secondi (deve essere maggiore di DURATA_WARMUP_CAMERA)
+DURATA_WARMUP_CAMERA = 4        # durata della preview per mettere a fuoco la camera)
 
 # costanti per i colori
 w=( 255, 255, 255) # bianco
