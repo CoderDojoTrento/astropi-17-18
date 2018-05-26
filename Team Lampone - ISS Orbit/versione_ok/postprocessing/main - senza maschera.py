@@ -23,7 +23,7 @@
 from opencv_stitcher import MyStitcher
 
 ##### Import - Librerie ####
-from time import sleep,time
+from time import sleep
 from datetime import datetime
 import sys
 import re
@@ -85,11 +85,6 @@ def riduci_immagine(immagine):
     return immagine
 
 
-def applica_maschera(immagine):
-    maschera = np.zeros((1944, 2592), dtype=np.uint8)
-    cv2.circle(maschera, (1270,950), 1050, (255,255,255),-1,8,0)
-    return cv2.bitwise_and(immagine, immagine, mask=maschera)
-
 #=============================================================================
 
 ##### Programma principale #####        
@@ -103,10 +98,7 @@ fattore_di_scala, orientazione = calcola_fattore_di_riduzione(imageA)
 print("fattore_di_scala", fattore_di_scala)
 print("orientazione", orientazione)
 imageA = riduci_immagine(imageA)
-imageA = applica_maschera(imageA)
 for file_immagine in lista_imgs[1:-1]:
-    ora_inizio = time()
-    print(datetime.fromtimestamp(ora_inizio).strftime("================================================================================ Inizio analisi coppia: %Y-%m-%d %H:%M:%S.%f"))
     immagine_2 = file_immagine
     timestamp_2 = datetime.strptime(immagine_2,NOME_FILE_ASPETTO)
     delta_t = timestamp_2 - timestamp_1
@@ -114,7 +106,6 @@ for file_immagine in lista_imgs[1:-1]:
     print("Confronto %s e %s (Dt = %f s)..." % (immagine_1, immagine_2, delta_t_sec))
     imageB = cv2.imread(os.path.join(FOLDER_IMMAGINI, immagine_2))
     imageB = riduci_immagine(imageB)
-    imageB = applica_maschera(imageB)
 
     # stitch the images together to create a panorama
     stitcher = MyStitcher()
@@ -135,13 +126,13 @@ for file_immagine in lista_imgs[1:-1]:
     if (M is None):
         print("Corrispondenze non trovate: passo alla prossima coppia di immagini.")
     else:
-        print("Distanza espressa in pixel: ", end='')
+        print("Distanza espressa in pixel:")
         sx=M[0][2]
         sy=M[1][2]
         distanza_px=np.sqrt(sx**2 + sy**2)
         print(distanza_px)
         
-        print("Distanza espressa in metri: ", end='')
+        print("Distanza espressa in metri:")
         altezzaiss = 408*1000 #altezza ISS (m) TODO: da calcolare con PyEphem
     #    distanza = (1/focale*(distanza_px*(sensx/resx/1000))*altezzaiss)/1000
         distanza = (sensx*altezzaiss/focale)*(distanza_px/resx)*fattore_di_scala
@@ -164,6 +155,3 @@ for file_immagine in lista_imgs[1:-1]:
     imageA = imageB
     immagine_1 = immagine_2
     timestamp_1 = timestamp_2
-    ora_fine = time()
-    print(datetime.fromtimestamp(ora_fine).strftime("================================================================================ Fine analisi coppia: %Y-%m-%d %H:%M:%S.%f"), end='')
-    print(" [durata secondi: ", ora_fine-ora_inizio, "]")
