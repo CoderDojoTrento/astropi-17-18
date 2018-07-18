@@ -92,7 +92,7 @@ file_dati.close()
 f, axarr = plt.subplots(2, sharex=False)
 f.subplots_adjust(hspace=0.5)
 
-axarr[0].set_title("Temperature oscillating trend analysis [Lampone Team data]")  # Analisi della parte oscillante | Temperature oscillating trend analysis
+axarr[0].set_title("Analisi della parte oscillante della temperatura [Lampone Team data]")  # Analisi della parte oscillante della temperatura | Temperature oscillating trend analysis
 popt, pcov = curve_fit(func, xdata, ydata)
 perr = np.sqrt(np.diag(pcov))
 print('popt',popt)
@@ -107,37 +107,37 @@ print('perr',perrO)
 ydata4 = np.apply_along_axis(oscillazione, 0, xdata, poptO[0], poptO[1], poptO[2])
 
 # best fit con | best fit with
-axarr[0].plot(xdata, ydata3, 'g+', label='difference between experimental data and best exponential fit for the cooling curve') # differenza tra dati sperimentali e best fit per la curva esponenziale di raffreddamento | difference between experimental data and best exponential fit for the cooling curve
-axarr[0].plot(xdata, ydata4, 'r-', label='best fit with $f(x) = d \cdot sin(e \cdot x + f)$ $\Longrightarrow$ d=%5.3f, e=%5.3f, f=%5.3f' % tuple(poptO), linewidth=4.0)
+axarr[0].plot(xdata, ydata3, 'g+', label='differenza tra dati sperimentali e best fit per la curva esponenziale di raffreddamento') # differenza tra dati sperimentali e best fit per la curva esponenziale di raffreddamento | difference between experimental data and best exponential fit for the cooling curve
+axarr[0].plot(xdata, ydata4, 'r-', label='best fit con $f(x) = d \cdot sin(e \cdot x + f)$ $\Longrightarrow$ d=%5.3f, e=%5.3f, f=%5.3f' % tuple(poptO), linewidth=4.0) # best fit con | best fit with 
 axarr[0].legend(loc=3)
-axarr[0].set_ylabel('Temperature (°C)') # Temperatura (°C) | Temperature (°C)
-axarr[0].set_xlabel("Time (fractions of hours from the beginning of the experiment)") # Tempo (ore a partire dall'inizio dell'esperimento) | Time (fractions of hours from the beginning of the experiment)
-axarr[0].set_ylabel("$\Delta$ Temperature (°C)") # $\Delta$ Temperatura (°C) | $\Delta$ Temperature (°C)
+axarr[0].set_ylabel('Temperatura (°C)') # Temperatura (°C) | Temperature (°C)
+axarr[0].set_xlabel("Tempo (ore a partire dall'inizio dell'esperimento)") # Tempo (ore a partire dall'inizio dell'esperimento) | Time (fractions of hours from the beginning of the experiment)
+axarr[0].set_ylabel("$\Delta$ Temperatura (°C)") # $\Delta$ Temperatura (°C) | $\Delta$ Temperature (°C)
 
 ydata5 = np.apply_along_axis(oscillazione, 0, xdata, poptO[0], poptO[1], poptO[2])
 # Best fit sinusoidale e altezza Sole (sullo stesso grafico, con assi distinti)
-axarr[1].set_title('Comparison between superheating cycle and exposure to the Sun [Lampone Team data]') # Confronto tra ciclo di surriscaldamento ed esposizione al Sole | Comparison between superheating cycle and exposure to the Sun
+axarr[1].set_title('Confronto tra ciclo di surriscaldamento ed esposizione al Sole [dati Team Lampone]') # Confronto tra ciclo di surriscaldamento ed esposizione al Sole [dati Team Lampone] | Comparison between superheating cycle and exposure to the Sun [Lampone Team data]
 color = 'tab:red'
 axarr[1].plot(xdata, ydata5, color=color)
 axarr[1].set_ylim((-0.2,0.2))
-label1 = mlines.Line2D([], [], color=color, label='best sinusoidal fit') # differenza tra dati sperimentali e best fit | difference between experimental data and best fit
+label1 = mlines.Line2D([], [], color=color, label='best fit sinusoidale') # best fit sinusoidale | best sinusoidal fit
 axarr[1].tick_params(axis='y', labelcolor=color)
 ax2 = axarr[1].twinx()  # instantiate a second axes that shares the same x-axis
-axarr[1].set_ylabel("$\Delta$ Temperature (°C)", color=color) # $\Delta$ Temperatura (°C) | $\Delta$ Temperature (°C)
-axarr[1].set_xlabel('Hours (GMT time)') # Tempo (ora GMT) | Hours (GMT time)
+axarr[1].set_ylabel("$\Delta$ Temperatura (°C)", color=color) # $\Delta$ Temperatura (°C) | $\Delta$ Temperature (°C)
+axarr[1].set_xlabel('Tempo (ora GMT)') # Tempo (ora GMT) | Hours (GMT time)
 color = 'tab:blue'
 # np.array(Altezze).clip(0)
 ax2.plot(xdata, Altezze, color=color)
 ax2.set_ylim((-90,90))
 ax2.tick_params(axis='y', labelcolor=color)
-label2 = mlines.Line2D([], [], color=color, label='Sun altitude above Earth local horizon') # Altezza del Sole sull'orizzonte locale terrestre | Sun altitude above Earth local horizon
-ax2.set_ylabel("Sun altitude (°)", color=color) # Altezza del Sole (°) | Sun altitude (°)
+label2 = mlines.Line2D([], [], color=color, label='Altezza del Sole sull''orizzonte locale terrestre') # Altezza del Sole sull'orizzonte locale terrestre | Sun altitude above Earth local horizon
+ax2.set_ylabel("Altezza del Sole (°)", color=color) # Altezza del Sole (°) | Sun altitude (°)
 ax2.set_yticks(np.arange(-60,61,30))
 ombra = np.zeros(len(Altezze))
 ombra[np.array(Altezze)<0] = True
 ax2.fill_between(xdata, 0, 1, where=(ombra==True), color='grey', alpha=0.3, transform=ax2.get_xaxis_transform())
 plt.xticks(xdata[::900], xlabels[::900])
-label3 = Patch(color='grey', alpha=0.3, label='ISS eclipsed')
+label3 = Patch(color='grey', alpha=0.3, label='ISS eclissata') # ISS eclissata | ISS eclipsed
 plt.legend(handles=[label1, label2, label3], loc=2)
 
 plt.show()
